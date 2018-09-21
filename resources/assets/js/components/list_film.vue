@@ -3,9 +3,9 @@
         <div class="container">
             <div class="row">
                 <div class="card">
-                    <img class="card-img-top" src="{this.film.photo}">
+                    <img class="card-img-top" v-bind:src="this.film.photo" />
                     <div class="card-body">
-                        <h5 class="card-title">{{this.film.name}}</h5>
+                        <h5 class="card-title"><a :href="'films/' + this.film.slug">{{this.film.name}}</a></h5>
                         <h6 class="card-subtitle mb-2 text-muted">
                             <span class="fa fa-star checked" v-for="i in this.film.rating" ></span>
                             <span class="fa fa-star" v-for="i in 5 - this.film.rating" ></span>
@@ -45,7 +45,7 @@
 
         data: function () {
             return {
-                film: {},
+                film: {rating:0, genre: ''},
                 currentFilmIndex : 0,
                 films: []                     
             }

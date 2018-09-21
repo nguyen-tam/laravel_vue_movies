@@ -19,8 +19,19 @@
 </head>
 <body>  
 
+
   <div class="container">
 
+    <header>      
+      <div class="navbar navbar-dark bg-dark shadow-sm">
+        <div class="container d-flex justify-content-between">
+          <a href="/" class="navbar-brand d-flex align-items-center">            
+            <strong>Home</strong>
+          </a>          
+        </div>
+      </div>
+    </header>
+    
     @yield('content')    
 
     <hr>

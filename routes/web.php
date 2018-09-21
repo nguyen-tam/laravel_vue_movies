@@ -14,3 +14,4 @@
 Route::get('/', 'HomeController@index');
 
 Route::get('/films', 'FilmController@list');
+Route::get('/films/{slug}', 'FilmController@showDetail');

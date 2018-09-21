@@ -17364,6 +17364,7 @@ window.Vue.config.debug = true;
  */
 
 Vue.component('list-film', __webpack_require__(162));
+Vue.component('film-detail', __webpack_require__(185));
 
 /***/ }),
 /* 135 */
@@ -18265,7 +18266,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     data: function data() {
         return {
-            film: {},
+            film: { rating: 0, genre: '' },
             currentFilmIndex: 0,
             films: []
         };
@@ -48868,13 +48869,17 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('img', {
     staticClass: "card-img-top",
     attrs: {
-      "src": "{this.film.photo}"
+      "src": this.film.photo
     }
   }), _vm._v(" "), _c('div', {
     staticClass: "card-body"
   }, [_c('h5', {
     staticClass: "card-title"
-  }, [_vm._v(_vm._s(this.film.name))]), _vm._v(" "), _c('h6', {
+  }, [_c('a', {
+    attrs: {
+      "href": 'films/' + this.film.slug
+    }
+  }, [_vm._v(_vm._s(this.film.name))])]), _vm._v(" "), _c('h6', {
     staticClass: "card-subtitle mb-2 text-muted"
   }, [_vm._l((this.film.rating), function(i) {
     return _c('span', {
@@ -60255,6 +60260,191 @@ module.exports = function listToStyles (parentId, list) {
   return styles
 }
 
+
+/***/ }),
+/* 184 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+
+    data: function data() {
+        return {
+            film: { rating: 0, genre: '' }
+        };
+    },
+    mounted: function mounted() {
+        this.fetchFilm();
+    },
+
+    methods: {
+        fetchFilm: function fetchFilm() {
+            var app = this;
+            axios.get('/api/films/' + this.slug).then(function (resp) {
+                app.film = resp.data;
+            }).catch(function (resp) {
+                alert("Could not load film");
+            });
+        }
+    },
+    props: ['slug']
+});
+
+/***/ }),
+/* 185 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+/* styles */
+__webpack_require__(188)
+
+var Component = __webpack_require__(163)(
+  /* script */
+  __webpack_require__(184),
+  /* template */
+  __webpack_require__(186),
+  /* scopeId */
+  "data-v-45894f67",
+  /* cssModules */
+  null
+)
+Component.options.__file = "G:\\vagrant-php-nginx\\codeline\\resources\\assets\\js\\components\\film_detail.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] film_detail.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-45894f67", Component.options)
+  } else {
+    hotAPI.reload("data-v-45894f67", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 186 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "container"
+  }, [_c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "card"
+  }, [_c('img', {
+    staticClass: "card-img-top",
+    attrs: {
+      "src": this.film.photo
+    }
+  }), _vm._v(" "), _c('div', {
+    staticClass: "card-body"
+  }, [_c('h5', {
+    staticClass: "card-title"
+  }, [_vm._v(_vm._s(this.film.name))]), _vm._v(" "), _c('h6', {
+    staticClass: "card-subtitle mb-2 text-muted"
+  }, [_vm._l((this.film.rating), function(i) {
+    return _c('span', {
+      staticClass: "fa fa-star checked"
+    })
+  }), _vm._v(" "), _vm._l((5 - this.film.rating), function(i) {
+    return _c('span', {
+      staticClass: "fa fa-star"
+    })
+  })], 2), _vm._v(" "), _c('p', {
+    staticClass: "card-text"
+  }, [_vm._v(_vm._s(this.film.description))]), _vm._v(" "), _c('p', {
+    staticClass: "card-text"
+  }, [_vm._v("Country : " + _vm._s(this.film.country))]), _vm._v(" "), _c('p', {
+    staticClass: "card-text"
+  }, [_vm._v("Release Date : " + _vm._s(this.film.release_date))]), _vm._v(" "), _c('p', {
+    staticClass: "card-text"
+  }, [_vm._v("Ticket Price : " + _vm._s(this.film.ticket_price) + " $")]), _vm._v(" "), _c('p', {
+    staticClass: "card-text"
+  }, [_vm._v("Genre : \n                    "), _vm._l((this.film.genre.split(',')), function(genre) {
+    return _c('span', [_vm._v(_vm._s(genre) + "  ")])
+  })], 2)])])])])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-45894f67", module.exports)
+  }
+}
+
+/***/ }),
+/* 187 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(168)();
+exports.push([module.i, "\n.checked[data-v-45894f67] {\n    color: orange;\n}\n", ""]);
+
+/***/ }),
+/* 188 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(187);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(182)("4b86c828", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-45894f67\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./film_detail.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-45894f67\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./film_detail.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
 
 /***/ })
 /******/ ]);

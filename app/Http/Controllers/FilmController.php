@@ -24,6 +24,11 @@ class FilmController extends Controller
         return view('films');
     }
 
+    public function showDetail($slug)
+    {
+        return view('film_detail', ['slug' => $slug] );
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -52,9 +57,9 @@ class FilmController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        return Film::find($id);
+        return Film::where('slug', '=' ,$slug)->firstOrFail();
     }
 
     /**

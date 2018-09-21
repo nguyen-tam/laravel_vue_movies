@@ -18,6 +18,12 @@ class FilmController extends Controller
         return Film::all();
     }
 
+    public function list()
+    {
+        //
+        return view('films');
+    }
+
     /**
      * Show the form for creating a new resource.
      *

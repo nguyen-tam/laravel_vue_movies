@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+use Image;
 use App\Film;
 
 class FilmController extends Controller
@@ -36,7 +38,7 @@ class FilmController extends Controller
      */
     public function create()
     {
-        //
+        return view('film_create');
     }
 
     /**
@@ -48,7 +50,19 @@ class FilmController extends Controller
     public function store(Request $request)
     {
         //
-        return Film::create($request->all());
+
+        $film = $request->all();        
+
+        $imageData = $film['photo'];        
+        $fileName = Carbon::now()->timestamp . '_' . uniqid() . '.' . explode('/', explode(':', substr($imageData, 0, strpos($imageData, ';')))[1])[1];
+        $img = Image::make($film['photo'])->save(public_path('images/').$fileName);
+
+        $film['photo'] = $fileName;
+        $film['release_date'] = date('Y-m-d', strtotime($film['release_date']));
+        $film['slug'] = str_slug($film['name'], '-');
+
+
+        return Film::create($film);
     }
 
     /**

@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row">
             <div class="card">
-                <img class="card-img-top" v-bind:src="this.film.photo" />
+                <img class="card-img-top mx-auto" v-bind:src="'/images/' + this.film.photo" style="width: 508px;height: auto" />
                 <div class="card-body">
                     <h5 class="card-title">{{this.film.name}}</h5>
                     <h6 class="card-subtitle mb-2 text-muted">
@@ -34,7 +34,7 @@
 
         data: function () {
             return {
-                film: {rating:0, genre: ''}                  
+                film: {rating:0, genre: '', photo: ''}                  
             }
         },        
         mounted() {                

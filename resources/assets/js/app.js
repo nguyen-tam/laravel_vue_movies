@@ -20,3 +20,4 @@ window.Vue.config.debug = true;
 Vue.component('list-film', require('./components/list_film.vue'));
 Vue.component('film-detail', require('./components/film_detail.vue'));
 Vue.component('film-create', require('./components/film_create.vue'));
+Vue.component('film-comment', require('./components/film_comment.vue'));

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Image;
 use App\Film;
+use App\Comment;
 
 class FilmController extends Controller
 {
@@ -74,7 +75,7 @@ class FilmController extends Controller
     public function show($slug)
     {
         return Film::where('slug', '=' ,$slug)->firstOrFail();
-    }
+    }    
 
     /**
      * Show the form for editing the specified resource.

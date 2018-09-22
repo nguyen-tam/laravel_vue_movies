@@ -17700,6 +17700,7 @@ window.Vue.config.debug = true;
 Vue.component('list-film', __webpack_require__(172));
 Vue.component('film-detail', __webpack_require__(171));
 Vue.component('film-create', __webpack_require__(170));
+Vue.component('film-comment', __webpack_require__(197));
 
 /***/ }),
 /* 138 */
@@ -18785,7 +18786,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     data: function data() {
         return {
-            film: { rating: 0, genre: '' }
+            film: { rating: 0, genre: '', photo: '' }
         };
     },
     mounted: function mounted() {
@@ -49580,9 +49581,13 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('div', {
     staticClass: "card"
   }, [_c('img', {
-    staticClass: "card-img-top",
+    staticClass: "card-img-top mx-auto",
+    staticStyle: {
+      "width": "508px",
+      "height": "auto"
+    },
     attrs: {
-      "src": this.film.photo
+      "src": '/images/' + this.film.photo
     }
   }), _vm._v(" "), _c('div', {
     staticClass: "card-body"
@@ -62431,6 +62436,251 @@ var Datepicker = {render: function(){var _vm=this;var _h=_vm.$createElement;var 
 __webpack_require__(137);
 module.exports = __webpack_require__(138);
 
+
+/***/ }),
+/* 183 */,
+/* 184 */,
+/* 185 */,
+/* 186 */,
+/* 187 */,
+/* 188 */,
+/* 189 */,
+/* 190 */,
+/* 191 */,
+/* 192 */,
+/* 193 */,
+/* 194 */,
+/* 195 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+
+    data: function data() {
+        return {
+            comments: [],
+            comment: ''
+        };
+    },
+    mounted: function mounted() {
+        this.fetchComments();
+    },
+
+    methods: {
+        fetchComments: function fetchComments() {
+            var app = this;
+            axios.get('/api/comments/' + this.slug).then(function (resp) {
+                app.comments = resp.data;
+            }).catch(function (resp) {
+                alert("Could not load comments");
+            });
+        },
+
+        submitComment: function submitComment() {
+
+            event.preventDefault();
+            var app = this;
+            axios.post('/api/comments', { slug: app.slug, content: app.comment, name: app.name }).then(function (resp) {
+                if (resp.status == 200) {
+                    app.fetchComments();
+                }
+            }).catch(function (resp) {
+                alert("Could not submit comment");
+            });
+        }
+    },
+    props: ['slug', 'name']
+});
+
+/***/ }),
+/* 196 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(4)();
+exports.push([module.i, "\n.card[data-v-65d3e439] {\n    margin-top: 10px;\n}\n", ""]);
+
+/***/ }),
+/* 197 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+/* styles */
+__webpack_require__(199)
+
+var Component = __webpack_require__(5)(
+  /* script */
+  __webpack_require__(195),
+  /* template */
+  __webpack_require__(198),
+  /* scopeId */
+  "data-v-65d3e439",
+  /* cssModules */
+  null
+)
+Component.options.__file = "G:\\vagrant-php-nginx\\codeline\\resources\\assets\\js\\components\\film_comment.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] film_comment.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-65d3e439", Component.options)
+  } else {
+    hotAPI.reload("data-v-65d3e439", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 198 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "container"
+  }, [_c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "col-md-12"
+  }, _vm._l((this.comments), function(comment) {
+    return _c('div', {
+      staticClass: "card"
+    }, [_c('div', {
+      staticClass: "card-body"
+    }, [_c('h6', {
+      staticClass: "card-subtitle mb-2 text-muted"
+    }, [_vm._v("\n                        " + _vm._s(comment.name) + "\n                    ")]), _vm._v(" "), _c('p', {
+      staticClass: "card-text"
+    }, [_vm._v(_vm._s(comment.content))])])])
+  }))]), _vm._v(" "), (_vm.name != '') ? _c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "col-md-12"
+  }, [_c('div', {
+    staticClass: "card"
+  }, [_c('div', {
+    staticClass: "card-body"
+  }, [_c('div', {
+    staticClass: "form-label-group"
+  }, [_c('label', {
+    attrs: {
+      "for": "inputDes"
+    }
+  }, [_vm._v("Comment")]), _vm._v(" "), _c('textarea', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.comment),
+      expression: "comment"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "id": "inputDes",
+      "rows": "3"
+    },
+    domProps: {
+      "value": (_vm.comment)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.comment = $event.target.value
+      }
+    }
+  })]), _vm._v(" "), _c('br'), _vm._v(" "), (_vm.comment != '') ? _c('button', {
+    staticClass: "btn btn-primary",
+    attrs: {
+      "type": "submit"
+    },
+    on: {
+      "click": function($event) {
+        _vm.submitComment()
+      }
+    }
+  }, [_vm._v("Submit")]) : _vm._e()])])])]) : _vm._e()])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-65d3e439", module.exports)
+  }
+}
+
+/***/ }),
+/* 199 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(196);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(6)("b063d9f4", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-65d3e439\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./film_comment.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-65d3e439\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./film_comment.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
 
 /***/ })
 /******/ ]);

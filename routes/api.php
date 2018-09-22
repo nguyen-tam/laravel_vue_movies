@@ -23,3 +23,6 @@ Route::get('films/{slug}', 'FilmController@show');
 Route::post('films', 'FilmController@store');
 Route::put('films/{id}', 'FilmController@update');
 Route::delete('films/{id}', 'FilmController@delete');
+
+Route::get('comments/{slug}', 'CommentController@getFilmComments');
+Route::post('comments', 'CommentController@store');

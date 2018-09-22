@@ -16,3 +16,6 @@ Route::get('/', 'HomeController@index');
 Route::get('/films', 'FilmController@list');
 Route::get('/films/create', 'FilmController@create');
 Route::get('/films/{slug}', 'FilmController@showDetail');
+
+Auth::routes();
+Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');

@@ -7,6 +7,10 @@
                         <h6 class="card-subtitle mb-2 text-muted">
                             {{comment.name}}
                         </h6>
+                        <vue-moments-ago prefix="posted" suffix="ago" :date="comment.readable_created_at"></vue-moments-ago>
+                        <br/>
+                        <br/>
+
                         <p class="card-text">{{ comment.content }}</p>
                     </div>
                 </div>
@@ -40,6 +44,8 @@
 
 <script>
 
+    import VueMomentsAgo from 'vue-moments-ago'
+
     export default {
 
         data: function () {
@@ -50,7 +56,10 @@
         },        
         mounted() {                
             this.fetchComments();            
-        },        
+        },  
+        components: {
+            VueMomentsAgo
+        },      
         methods: {
             fetchComments() {
                 var app = this;                    

@@ -72,7 +72,7 @@ class FilmController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($slug)
+    public function getFilmBySlug($slug)
     {
         return Film::where('slug', '=' ,$slug)->firstOrFail();
     }    

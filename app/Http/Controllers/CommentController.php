@@ -17,8 +17,14 @@ class CommentController extends Controller
      */
     public function getFilmComments($slug)
     {
-        $film = Film::where('slug', '=' ,$slug)->firstOrFail();        
-        return Comment::where('film_id', '=' ,$film->id)->get();
+        $film = Film::where('slug', '=' ,$slug)->firstOrFail();  
+        $comments = Comment::where('film_id', '=' ,$film->id)->get();
+
+        foreach ($comments as $key => $value) {
+            $comments[$key]['readable_created_at'] = $value['created_at']->toIso8601String();         
+        }
+
+        return $comments;
     }
 
     /**
